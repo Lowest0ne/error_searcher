@@ -26,7 +26,7 @@ chrome.extension.onRequest.addListener( myRequest );
 
 chrome.runtime.onMessage.addListener(
   function( request, sender, sendResponse){
-    alert('here');
+    sendResponse('from the page');
   }
 );
 
