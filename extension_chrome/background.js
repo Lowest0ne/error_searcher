@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded',
     chrome.tabs.sendMessage( tab.id, {},
     function( response )
     {
-      alert( response );
+      $('#results').append( response );
     });
   });
 });

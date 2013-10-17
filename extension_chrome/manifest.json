@@ -20,7 +20,7 @@
   "content_scripts": [
   {
     "matches": [ "http://*/*", "https://*/*" ],
-    "js": ["main.js"]
+    "js": ["main.js", "jquery-1.10.2.min.js"]
   }
   ]
 }
