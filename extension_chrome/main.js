@@ -7,7 +7,7 @@ function generateSearchResults( html, url ){
 
   // compile the result into an html string ( or whatever we need it to be )
   new_html = compileResult( result );
-  return query.example;
+  return result;
 }
 
 /*

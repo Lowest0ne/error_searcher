@@ -1,5 +1,5 @@
 var globe = {
-  "results": 'word'
+  "results": 'this happens the first time.  Or, there were no results'
 }
 
 function processAnswers(data){
@@ -19,7 +19,8 @@ function queryStackOverflow( query )
   // result = query.example;
   // use different members of the query object to
   // create a stack overflow search
-  $.get("http://api.stackexchange.com/2.1/search?page=1&order=desc&sort=relevance&intitle=" + query.example + "&site=stackoverflow",
+  var search_var = encodeURIComponent( query.example );
+  $.get("http://api.stackexchange.com/2.1/search?page=1&order=desc&sort=relevance&intitle=" + search_var  + "&site=stackoverflow",
     processQuestionResult);
 
   // alert(query);
