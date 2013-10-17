@@ -11,13 +11,22 @@
 
   ],
 
-  "background":{
-    "page": "results.html"
-  },
-
   "browser_action": {
     "default_icon": "icon.png",
-    "default_title": "Search errors on Stack Overflow"
+    "default_title": "Search errors on Stack Overflow",
+    "default_popup": "results.html"
+  },
+
+  "content_scripts": [
+  {
+    "matches": [ "http://*/*", "https://*/*" ],
+    "js": [ "jquery-1.10.2.min.js",
+           "main.js",
+           "compile_result.js",
+           "process_localHost.js",
+           "query_stackOverflow.js"
+    ]
   }
+  ]
 
 }

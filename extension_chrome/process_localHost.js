@@ -6,8 +6,11 @@ function processLocalHost( html ){
   var y = html.search('</h2>');
   var result =  html.substring(x+2, y);
 
+
+  var string = document.getElementById('container').children[0].innerText;
+
   var query = {
-    example: result
+    example: string
   }
 
   return query;
