@@ -7,7 +7,7 @@ function generateSearchResults( html, url ){
 
   // compile the result into an html string ( or whatever we need it to be )
   new_html = compileResult( result );
-  return new_html;
+  return query.example;
 }
 
 /*
@@ -28,13 +28,4 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-
-
-
-
-
-
-
-
-
-
+//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
