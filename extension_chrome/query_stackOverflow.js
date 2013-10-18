@@ -1,6 +1,6 @@
 var globe = {
   "results": 'this happens the first time.  Or, there were no results'
-}
+};
 
 function processAnswers(data){
   //manage answer data
@@ -9,23 +9,35 @@ function processAnswers(data){
 }
 
 function processQuestionResult(data){
-  var questionId = data.items[0].question_id;
+  alert("STUFS");
+  var questionId = data.items[0].unescapedURL;
+  alert("Question Id:" + questionId);
   $.get("https://api.stackexchange.com/2.1/questions/"+ questionId + "/answers?order=desc&sort=votes&site=stackoverflow&filter=!bc0qAAU9ADlgOV",
       processAnswers);
 }
 
-function queryStackOverflow( query )
-{
+function queryStackOverflow(query){
   // result = query.example;
   // use different members of the query object to
-  // create a stack overflow search
-  var search_var = encodeURIComponent( query.example );
-  $.get("http://api.stackexchange.com/2.1/search?page=1&order=desc&sort=relevance&intitle=" + search_var  + "&site=stackoverflow",
+  // create a stack overflow search through google
+  
+  var search_var = encodeURIComponent(query);
+  // var search_var = encodeURIComponent( query.example );
+  // noResults(search_var);
+  alert("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + search_var);
+  $.get("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=" + search_var,
     processQuestionResult);
-
-  // alert(query);
-  // debugger;
+  
   // maybe process result into an object
   return globe.results;
-
 }
+
+// function noResults(query){
+//   $.get("http://api.stackexchange.com/2.1/search?page=1&order=desc&sort=relevance&intitle=" + query + "&site=stackoverflow",
+//     data);
+//   if data.items.length === 0 {
+//     alert("No results for this error.")
+//   } else {
+//     return query
+//   };
+// };

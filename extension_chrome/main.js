@@ -10,17 +10,6 @@ function generateSearchResults( html, url ){
   return result;
 }
 
-/*
-
-function myRequest( request, sender, sendResponse ){
-
-  alert( 'hey, that happened' );
-
-}
-
-
-chrome.extension.onRequest.addListener( myRequest );
-*/
 
 chrome.runtime.onMessage.addListener(
   function( request, sender, sendResponse){
