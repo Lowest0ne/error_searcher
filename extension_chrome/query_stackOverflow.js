@@ -11,7 +11,8 @@ function Query( options ){
         "accepted", "True",
         "pagesize", "5",
         "title", encodeURIComponent( options.error ),
-        "sort", "activity"
+        "sort", "activity",
+        "key", "LKwYYIv127PJRW6Ll8tqIA(("
       ]
     };
     return params;
@@ -32,7 +33,7 @@ function Query( options ){
     {
       var url = 'http://api.stackexchange.com/2.1/answers/' +
                 question_data[i].answer_id +
-                '?site=stackoverflow&filter=!-0NOezokjTM7';
+                '?site=stackoverflow&filter=!-0NOezokjTM7&key=LKwYYIv127PJRW6Ll8tqIA((';
 
       xmlHttp.open( "GET", url, false );
       xmlHttp.send( null );

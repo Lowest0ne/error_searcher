@@ -3,7 +3,7 @@
 
   "name": "Ruby On Rails Error Search",
   "description": "Finds Ruby On Rails server errors on page and searches for answers",
-  "version": "1.0",
+  "version": "1.1.1",
   "author": "Carl Schwope, Ben Calegari",
   "icons": { "128": "main_icon.png" },
 
