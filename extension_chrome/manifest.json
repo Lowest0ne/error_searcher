@@ -19,8 +19,8 @@
 
   "content_scripts": [
   {
-    "matches": [ "http://*/*", "https://*/*" ],
-    "js": [ "jquery-1.10.2.min.js",
+    "matches": [ "http://localhost:3000/*" ],
+    "js": [
            "main.js",
            "compile_result.js",
            "process_localHost.js",
