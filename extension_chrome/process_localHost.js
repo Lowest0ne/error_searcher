@@ -1,16 +1,12 @@
-function processLocalHost( html ){
+function processLocalHost( ){
 
-  // process the raw html into a javscript object that contains
-  // important query data
-  var x = html.search('2>');
-  var y = html.search('</h2>');
-  var result =  html.substring(x+2, y);
+  var string = document.body.getElementsByTagName('header')[0].innerText;
 
-
-  var string = document.getElementById('container').children[0].innerText;
+  if ( string.match(/ActiveRecord::RecordNotFound/) )
+    string = 'ActiveRecord::RecordNotFound';
 
   var query = {
-    example: string
+    error: string
   }
 
   return query;
