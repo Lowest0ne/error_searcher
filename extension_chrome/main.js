@@ -1,12 +1,15 @@
 function generateSearchResults( html, url ){
   // if url is local host
-//  query = processLocalHost( html );
+  query = processLocalHost( html );
 
   // use the query at stack overflow
-//  result = queryStackOverflow( query );
+  //result = queryStackOverflow( query );
+
+  overflow_query = new Query(query);
+  overflow_query.runQuery();
 
   // compile the result into an html string ( or whatever we need it to be )
-  var new_html = compileResult( 'string' );
+
   return compileResult( 'string' );
 }
 

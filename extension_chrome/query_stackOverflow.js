@@ -1,31 +1,52 @@
-var globe = {
-  "results": 'this happens the first time.  Or, there were no results'
-}
+function Query( options ){
+  this.options = options;
 
-function processAnswers(data){
-  //manage answer data
-  var answerBody = data.items[0].body;
-  globe.results = answerBody;
-}
+  this.createParams = function(){
+    var params = {
+      url: "http://api.stackexchange.com/2.1/",
+      type: "search/advanced/",
+      options: [
+        "site", "stackoverflow",
+        "tagged", "ruby-on-rails",
+        "accepted", "True",
+        "pageisize", "5",
+        "title", encodeURIComponent( options.error )
+      ]
+    };
+    return params;
+  }
 
-function processQuestionResult(data){
-  var questionId = data.items[0].question_id;
-  $.get("https://api.stackexchange.com/2.1/questions/"+ questionId + "/answers?order=desc&sort=votes&site=stackoverflow&filter=!bc0qAAU9ADlgOV",
-      processAnswers);
-}
 
-function queryStackOverflow( query )
-{
-  // result = query.example;
-  // use different members of the query object to
-  // create a stack overflow search
-  var search_var = encodeURIComponent( query.example );
-  $.get("http://api.stackexchange.com/2.1/search?page=1&order=desc&sort=relevance&intitle=" + search_var  + "&site=stackoverflow",
-    processQuestionResult);
+  this.runQuery = function(){
+    var query_params = this.createParams();
+    var query_url = this.createUrl( query_params );
+    alert( query_url );
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", query_url, false );
+    xmlHttp.send( null );
+    var response = xmlHttp.responseText;
+    var obj = JSON.parse( response );
+    return this.compileResult(obj.items);
+  }
 
-  // alert(query);
-  // debugger;
-  // maybe process result into an object
-  return globe.results;
+  this.createUrl = function( params ){
+    var string = params.url + params.type + '?';
+    for ( var i = 0; i < params.options.length; i+=2)
+    {
+      var str = params.options[i] + '=' + params.options[i + 1] + '&';
+      string += str;
+    }
+    return string.slice(0,-1);
+  }
 
-}
+  this.compileResult = function( result ){
+    var compiled = [];
+    for ( var i = 0; i < result.length; i++)
+    {
+      compiled.push( { title: result[i].title,
+                     answer_id: result[i].accepted_answer_id } );
+    }
+   return compiled;
+  }
+
+};
