@@ -9,8 +9,9 @@ function Query( options ){
         "site", "stackoverflow",
         "tagged", "ruby-on-rails",
         "accepted", "True",
-        "pageisize", "5",
-        "title", encodeURIComponent( options.error )
+        "pagesize", "5",
+        "title", encodeURIComponent( options.error ),
+        "sort", "activity"
       ]
     };
     return params;
@@ -20,13 +21,27 @@ function Query( options ){
   this.runQuery = function(){
     var query_params = this.createParams();
     var query_url = this.createUrl( query_params );
-    alert( query_url );
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open( "GET", query_url, false );
     xmlHttp.send( null );
     var response = xmlHttp.responseText;
     var obj = JSON.parse( response );
-    return this.compileResult(obj.items);
+    var question_data = this.compileResult( obj.items );
+
+    for ( var i = 0; i < question_data.length; i++ )
+    {
+      var url = 'http://api.stackexchange.com/2.1/answers/' +
+                question_data[i].answer_id +
+                '?site=stackoverflow&filter=!-0NOezokjTM7';
+
+      xmlHttp.open( "GET", url, false );
+      xmlHttp.send( null );
+      var this_response = xmlHttp.responseText;
+      var this_json = JSON.parse( this_response );
+      question_data[i].answer = this_json.items[0].body;
+    }
+
+    return question_data;
   }
 
   this.createUrl = function( params ){
@@ -43,10 +58,14 @@ function Query( options ){
     var compiled = [];
     for ( var i = 0; i < result.length; i++)
     {
-      compiled.push( { title: result[i].title,
-                     answer_id: result[i].accepted_answer_id } );
+      compiled.push(
+        { title: result[i].title,
+          answer_id: result[i].accepted_answer_id,
+          question_id: result[i].question_id
+        }
+      );
     }
-   return compiled;
+    return compiled;
   }
 
 };

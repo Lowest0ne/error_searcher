@@ -1,14 +1,9 @@
-function processLocalHost( html ){
+function processLocalHost( ){
 
-  // process the raw html into a javscript object that contains
-  // important query data
+  var string = document.body.getElementsByTagName('header')[0].innerText;
 
-  var string = document.getElementById('container').children[0].innerText;
-
-  if ( string.match(/No route matches/) )
-    string = 'No route matches';
-
-
+  if ( string.match(/ActiveRecord::RecordNotFound/) )
+    string = 'ActiveRecord::RecordNotFound';
 
   var query = {
     error: string

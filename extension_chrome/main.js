@@ -1,21 +1,18 @@
-function generateSearchResults( html, url ){
+function generateSearchResults(){
   // if url is local host
-  query = processLocalHost( html );
+  query = processLocalHost();
 
   // use the query at stack overflow
   //result = queryStackOverflow( query );
 
   overflow_query = new Query(query);
-  overflow_query.runQuery();
+  return overflow_query.runQuery();
 
-  // compile the result into an html string ( or whatever we need it to be )
-
-  return compileResult( 'string' );
 }
 
 // responed to the messgage sent by clicking on the icon
 chrome.runtime.onMessage.addListener(
   function( request, sender, sendResponse){
-    sendResponse( generateSearchResults( 'string', 'string' )) ;
+    sendResponse( generateSearchResults() ) ;
   }
 );
